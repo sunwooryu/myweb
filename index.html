@@ -11,8 +11,11 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&display=swap" rel="stylesheet">
     
+    <!-- Leaflet.js CSS & JS for Interactive Map (No API Key Required) -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+
     <style>
-        /* 테마 변수 설정 (다크모드가 기본값) */
         :root {
             --bg-main: #0B2519;
             --bg-card: rgba(2, 48, 32, 0.45);
@@ -66,6 +69,7 @@
         .bg-butter { background-color: #E9C46A; }
         .border-butter { border-color: #E9C46A; }
         .text-butter { color: #E9C46A; }
+        .text-forest-dark { color: #0B2519; }
         
         /* Smooth Scale Transition */
         .hover-card {
@@ -99,6 +103,38 @@
         ::-webkit-scrollbar-thumb:hover {
             background: #E9C46A;
         }
+
+        .leaflet-container {
+            background-color: var(--bg-main) !important;
+            font-family: inherit;
+        }
+        .leaflet-popup-content-wrapper {
+            background-color: #ffffff !important;
+            color: #1e293b !important;
+            border-radius: 1rem !important;
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.2), 0 8px 10px -6px rgba(0, 0, 0, 0.2) !important;
+            border: 2px solid #E9C46A !important;
+        }
+        .leaflet-popup-tip {
+            background-color: #ffffff !important;
+            border-left: 2px solid #E9C46A !important;
+            border-bottom: 2px solid #E9C46A !important;
+        }
+        .leaflet-popup-content h5 {
+            font-weight: 800;
+            margin-bottom: 4px;
+        }
+        /* Custom Scrollbar for Bakery Sidebar */
+        #bakery-list::-webkit-scrollbar {
+            width: 4px;
+        }
+        #bakery-list::-webkit-scrollbar-thumb {
+            background: var(--border-color);
+            border-radius: 2px;
+        }
+        #bakery-list::-webkit-scrollbar-thumb:hover {
+            background: #E9C46A;
+        }
     </style>
 </head>
 <body class="theme-bg-main theme-text-main min-h-screen selection:bg-amber-400 selection:text-forest-dark overflow-x-hidden">
@@ -106,8 +142,7 @@
     <!-- Interactive Star Dust Trail Canvas -->
     <canvas id="trail-canvas" class="fixed inset-0 pointer-events-none z-[9999]"></canvas>
 
-    <!-- Navigation Header -->
-    <header class="fixed top-0 left-0 w-full theme-nav-bg backdrop-blur-md z-50 border-b theme-border transition-colors duration-400">
+    <header class="fixed top-0 left-0 w-full theme-nav-bg backdrop-blur-md z-[1000] border-b theme-border transition-colors duration-400">
         <div class="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
             <a href="#" class="text-butter font-bold text-xl tracking-wider flex items-center gap-2">
                 <svg class="w-6 h-6 animate-float" fill="currentColor" viewBox="0 0 24 24">
@@ -139,9 +174,7 @@
         </div>
     </header>
 
-    <!-- Hero Section -->
     <section class="relative min-h-screen flex items-center justify-center pt-24 pb-12 overflow-hidden px-6">
-        <!-- Background decorative elements -->
         <div class="absolute -top-40 -right-40 w-96 h-96 bg-emerald-800/10 rounded-full filter blur-3xl"></div>
         <div class="absolute -bottom-40 -left-40 w-96 h-96 bg-amber-500/5 rounded-full filter blur-3xl"></div>
 
@@ -153,7 +186,7 @@
                         <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-amber-400 opacity-75"></span>
                         <span class="relative inline-flex rounded-full h-2 w-2 bg-amber-500"></span>
                     </span>
-                    SSAFY 13기 동료들을 위한 웰컴 페이지
+                    SSAFY 16기 동료들을 위한 웰컴 페이지
                 </div>
                 
                 <h1 class="text-3xl md:text-4xl lg:text-5xl font-extrabold leading-tight theme-text-main">
@@ -191,17 +224,17 @@
             <!-- Hero Interactive Graphic -->
             <div class="lg:col-span-5 flex justify-center items-center">
                 <div class="relative w-80 h-80 md:w-96 md:h-96 flex items-center justify-center">
-                    <!-- Spinning Aura -->
                     <div class="absolute inset-0 border border-dashed border-emerald-700/40 rounded-full animate-[spin_40s_linear_infinite]"></div>
                     <div class="absolute inset-6 border border-dashed border-amber-500/25 rounded-full animate-[spin_20s_linear_infinite_reverse]"></div>
                     
                     <!-- Main Avatar Frame -->
                     <div class="relative w-64 h-64 md:w-72 md:h-72 theme-bg-card border-4 theme-border rounded-full overflow-hidden shadow-2xl flex flex-col items-center justify-center text-center p-6 group hover:border-butter transition-all duration-500">
-                        <!-- Custom SVG Vector Character representation -->
                         <svg class="w-32 h-32 text-emerald-500 group-hover:scale-105 transition-transform duration-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9.813 15.904L9 21m0 0l-.813-5.096M9 21h3m-3.405-12.006a5.002 5.002 0 019.81 0M15 11h.01M9 11h.01M12 12h.01M12 16h.01M10 16h.01M14 16h.01M16.24 16.24a6 6 0 11-8.484 0L12 12l4.24 4.24z" />
                         </svg>
-                        <h3 class="text-xl font-bold mt-4 text-butter">반전 가득한 예비 개발자</h3>
+                        <h3 class="text-xl font-bold mt-4 text-butter leading-tight">
+                            반전 가득한<br>예비 개발자
+                        </h3>
                         <p class="text-xs theme-text-muted mt-1">마우스를 올려 상호작용 해보세요!</p>
 
                         <!-- Float elements absolute within group -->
@@ -214,7 +247,6 @@
         </div>
     </section>
 
-    <!-- Quick Intro Section -->
     <section id="about" class="py-20 theme-bg-section relative border-y theme-border transition-colors duration-400">
         <div class="max-w-4xl mx-auto px-6 text-center space-y-6">
             <h2 class="text-sm font-semibold tracking-widest text-butter uppercase">ABOUT ME</h2>
@@ -227,7 +259,6 @@
         </div>
     </section>
 
-    <!-- Strengths Grid Section -->
     <section id="strengths" class="py-24 max-w-6xl mx-auto px-6">
         <div class="text-center space-y-4 mb-16">
             <h2 class="text-xs font-semibold tracking-widest text-butter uppercase">CORE VALUE</h2>
@@ -317,13 +348,12 @@
         </div>
     </section>
 
-    <!-- Deep Dive Interests & Playlists (Soul & Taste) -->
     <section id="soul-taste" class="py-24 theme-bg-section/30 border-y theme-border">
         <div class="max-w-6xl mx-auto px-6">
             <div class="text-center space-y-4 mb-16">
-                <h2 class="text-xs font-semibold tracking-widest text-butter uppercase">PLAYLISTS & BREADS</h2>
-                <p class="text-3xl md:text-4xl font-extrabold theme-text-main">저의 취향 도감 & 코딩 메이트</p>
-                <p class="theme-text-muted max-w-lg mx-auto text-sm">제가 평소 귀를 기울이는 소리와 입을 즐겁게 하는 맛의 조합입니다.</p>
+                <h2 class="text-xs font-semibold tracking-widest text-butter uppercase">PLAYLISTS & BREAD MAP</h2>
+                <p class="text-3xl md:text-4xl font-extrabold theme-text-main">저의 취향 도감 & 30대 빵지도</p>
+                <p class="theme-text-muted max-w-lg mx-auto text-sm">제가 평소 귀를 기울이는 소리와 사랑에 빠진 서울의 베이커리 맵입니다.</p>
             </div>
 
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
@@ -382,7 +412,7 @@
                 <!-- Bread Guide / Recommended Bakery List -->
                 <div class="theme-bg-card border theme-border rounded-3xl p-8 space-y-6">
                     <div class="space-y-1">
-                        <h3 class="text-lg font-bold theme-text-main">🥖 빵돌이/빵순이 전용 빵 도감</h3>
+                        <h3 class="text-lg font-bold theme-text-main">🥖 빵돌이/빵순이 전용 빵 가이드</h3>
                         <p class="text-xs theme-text-muted">빵에 관해서라면 대화가 마르지 않습니다.</p>
                     </div>
 
@@ -403,15 +433,50 @@
                         <span class="text-xl">💡</span>
                         <div class="text-xs text-amber-800 dark:text-amber-100 space-y-1">
                             <strong class="block">전국구 빵 맛집 추천 가능!</strong>
-                            <span>"지역 불문 최애 빵집 리스트를 대량 보유하고 있어요. 소통 첫날, 빵 취향이나 좋아하는 빵집 이야기로 자연스럽게 친근함을 나눠주세요!"</span>
+                            <span>"지역 불문 최애 빵집 리스트를 대량 보유하고 있어요. 소통 첫날, 아래 실시간 서울 30대 빵지도를 보며 자연스럽게 친근함을 나눠주세요!"</span>
                         </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mt-12 theme-bg-card border theme-border rounded-3xl p-6 md:p-8 space-y-6">
+                <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
+                    <div>
+                        <h3 class="text-xl font-bold theme-text-main flex items-center gap-2">
+                            <span>🗺️ 선우가 엄선한 서울 30대 빵집 지도</span>
+                            <span class="text-[10px] bg-butter text-forest-dark px-2.5 py-0.5 rounded-full font-extrabold tracking-wide">SEOUL 30 BAKERY MAP</span>
+                        </h3>
+                        <p class="text-xs theme-text-muted">서울 각지의 전설적인 노포부터 신흥 대란 빵집까지 30곳의 좌표를 모두 기입했습니다. 필터링 및 지도를 탐색해보세요!</p>
+                    </div>
+                    <!-- Search & Category Filters -->
+                    <div class="flex flex-wrap items-center gap-2">
+                        <input type="text" id="bakery-search" oninput="filterBakeries()" placeholder="빵집 이름 또는 대표 메뉴 검색..." class="text-xs theme-input-bg border theme-border rounded-xl px-4 py-2 w-48 focus:outline-none focus:border-butter theme-text-main transition shadow-sm">
+                        <div class="flex gap-1">
+                            <button onclick="setBakeryCategory('all')" id="btn-cat-all" class="text-[10px] bg-butter text-forest-dark font-extrabold px-3 py-1.5 rounded-xl transition shadow-sm">전체</button>
+                            <button onclick="setBakeryCategory('classic')" id="btn-cat-classic" class="text-[10px] theme-bg-section theme-text-sub border theme-border font-bold px-3 py-1.5 rounded-xl transition shadow-sm hover:text-butter">🏰 노포</button>
+                            <button onclick="setBakeryCategory('trendy')" id="btn-cat-trendy" class="text-[10px] theme-bg-section theme-text-sub border theme-border font-bold px-3 py-1.5 rounded-xl transition shadow-sm hover:text-butter font-bold">🔥 핫플</button>
+                            <button onclick="setBakeryCategory('artisan')" id="btn-cat-artisan" class="text-[10px] theme-bg-section theme-text-sub border theme-border font-bold px-3 py-1.5 rounded-xl transition shadow-sm hover:text-butter">🥐 아티장</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Map & Interactive Sidebar Layout -->
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch">
+                    <!-- Left: Bakery List Sidebar (col-span-4) -->
+                    <div class="lg:col-span-4 flex flex-col h-[480px]">
+                        <div id="bakery-list" class="flex-1 overflow-y-auto pr-2 space-y-2 max-h-[480px]">
+                            <!-- JavaScript will inject dynamic list item divs here -->
+                        </div>
+                    </div>
+                    <!-- Right: Map Canvas Window (col-span-8) -->
+                    <div class="lg:col-span-8 h-[480px] rounded-2xl overflow-hidden border theme-border relative z-10 shadow-inner">
+                        <div id="bakery-map" class="w-full h-full"></div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Social Interactive Networking Board (Guestbook / virtual board) -->
     <section id="guestbook" class="py-24 max-w-4xl mx-auto px-6">
         <div class="text-center space-y-4 mb-16">
             <h2 class="text-xs font-semibold tracking-widest text-butter uppercase">NETWORKING BOARD</h2>
@@ -475,7 +540,6 @@
         </div>
     </section>
 
-    <!-- Call To Action (Coffee Chat) -->
     <section class="py-20 theme-bg-section relative overflow-hidden border-t theme-border transition-colors duration-400">
         <div class="max-w-4xl mx-auto px-6 text-center space-y-6 relative z-10">
             <span class="text-4xl animate-bounce inline-block">🥐☕🍲</span>
@@ -506,7 +570,6 @@
         <p class="text-[10px] text-emerald-800">Designed & Programmed with Vanilla JS, Tailwind CSS</p>
     </footer>
 
-    <!-- JavaScript Interactive Logic -->
     <script>
         // 0. Dark/Light Theme Toggle Logic
         const themeToggleBtn = document.getElementById('theme-toggle');
@@ -529,11 +592,13 @@
                 sunIcon.classList.add('hidden');
                 moonIcon.classList.remove('hidden');
                 localStorage.setItem('theme', 'light');
+                setMapTheme(true); // Switch map to Light style
                 alertCustomMessage("☀️ 산뜻하고 편안한 라이트모드로 전환되었습니다!");
             } else {
                 sunIcon.classList.remove('hidden');
                 moonIcon.classList.add('hidden');
                 localStorage.setItem('theme', 'dark');
+                setMapTheme(false); // Switch map to Dark style
                 alertCustomMessage("🌙 눈이 편안한 깊은 숲속 다크모드로 전환되었습니다!");
             }
         });
@@ -569,12 +634,11 @@
 
         // Custom Toast Alert Message Popup
         function alertCustomMessage(message) {
-            // Clear existing toasts to prevent overlaps
             const existingToasts = document.querySelectorAll('.custom-toast');
             existingToasts.forEach(t => t.remove());
 
             const popup = document.createElement('div');
-            popup.className = "custom-toast fixed bottom-8 right-8 bg-butter text-forest-dark font-bold px-6 py-4 rounded-2xl shadow-2xl z-50 border border-amber-300 max-w-sm transition-all duration-300 transform translate-y-10 opacity-0 text-sm";
+            popup.className = "custom-toast fixed bottom-8 right-8 bg-butter text-forest-dark font-bold px-6 py-4 rounded-2xl shadow-2xl z-[9999] border border-amber-300 max-w-sm transition-all duration-300 transform translate-y-10 opacity-0 text-sm";
             popup.innerText = message;
             document.body.appendChild(popup);
             
@@ -667,7 +731,6 @@
             const emoji = emojiSelect.value;
             const content = contentInput.value;
 
-            // Generate clean structure for new note card
             const noteCard = document.createElement('div');
             noteCard.className = "theme-note-bg border border-amber-500/40 p-5 rounded-2xl relative space-y-3 shadow-lg shadow-amber-500/5 hover-card animate-[pulse_1s_ease-out-in_1]";
             noteCard.innerHTML = `
@@ -678,14 +741,11 @@
                 <p class="text-xs theme-text-sub leading-relaxed">${escapeHTML(content)}</p>
             `;
 
-            // Insert at the beginning of list
             container.insertBefore(noteCard, container.firstChild);
             
-            // Increment note count
             notesCount++;
             document.getElementById('note-count').innerText = notesCount;
 
-            // Clear Inputs
             authorInput.value = '';
             contentInput.value = '';
 
@@ -709,7 +769,6 @@
         const ctx = canvas.getContext('2d');
         let particles = [];
 
-        // Resize Canvas to fully fit window viewports
         function resizeCanvas() {
             canvas.width = window.innerWidth;
             canvas.height = window.innerHeight;
@@ -717,25 +776,22 @@
         window.addEventListener('resize', resizeCanvas);
         resizeCanvas();
 
-        // Particle Blueprint class definition
         class StarParticle {
             constructor(x, y) {
                 this.x = x;
                 this.y = y;
-                // Randomized spread movement
                 this.vx = (Math.random() - 0.5) * 2.2;
-                this.vy = (Math.random() - 0.5) * 2.2 - 0.8; // Tendency to drift slightly upwards like dust
+                this.vy = (Math.random() - 0.5) * 2.2 - 0.8; 
                 
-                // Beautiful Theme Colors: Gold (#E9C46A) or Emerald Green
                 const colors = ['#E9C46A', '#10B981', '#34D399', '#F59E0B'];
                 this.color = colors[Math.floor(Math.random() * colors.length)];
                 
                 this.size = Math.random() * 4 + 1.5;
                 this.alpha = 1.0;
-                this.decay = Math.random() * 0.015 + 0.01; // Gradually fades out
+                this.decay = Math.random() * 0.015 + 0.01; 
                 this.rotation = Math.random() * Math.PI;
                 this.spin = (Math.random() - 0.5) * 0.05;
-                this.sparkleType = Math.random() > 0.4 ? 'circle' : 'star'; // 40% chance of star shape
+                this.sparkleType = Math.random() > 0.4 ? 'circle' : 'star';
             }
 
             update() {
@@ -752,12 +808,10 @@
                 ctx.rotate(this.rotation);
                 ctx.fillStyle = this.color;
                 
-                // Draw soft blur glow effect
                 ctx.shadowBlur = 8;
                 ctx.shadowColor = this.color;
 
                 if (this.sparkleType === 'star') {
-                    // Draw a beautiful 4-pointed sparkle
                     ctx.beginPath();
                     for (let i = 0; i < 4; i++) {
                         ctx.lineTo(0, -this.size * 1.5);
@@ -766,7 +820,6 @@
                     ctx.closePath();
                     ctx.fill();
                 } else {
-                    // Draw glowing micro dust
                     ctx.beginPath();
                     ctx.arc(0, 0, this.size, 0, Math.PI * 2);
                     ctx.fill();
@@ -775,9 +828,7 @@
             }
         }
 
-        // Spawn logic triggers on Mouse moves
         function spawnTrailParticles(x, y) {
-            // Spawn 2-3 particles per move for ideal density
             for (let i = 0; i < 3; i++) {
                 particles.push(new StarParticle(x, y));
             }
@@ -787,23 +838,18 @@
             spawnTrailParticles(e.clientX, e.clientY);
         });
 
-        // Touch support for Mobile Devices
         window.addEventListener('touchmove', (e) => {
             if (e.touches.length > 0) {
                 spawnTrailParticles(e.touches[0].clientX, e.touches[0].clientY);
             }
         }, { passive: true });
 
-        // Animation Loop
         function animateTrail() {
             ctx.clearRect(0, 0, canvas.width, canvas.height);
-            
             for (let i = particles.length - 1; i >= 0; i--) {
                 const p = particles[i];
                 p.update();
                 p.draw();
-                
-                // Remove fully faded out particles
                 if (p.alpha <= 0) {
                     particles.splice(i, 1);
                 }
@@ -811,9 +857,234 @@
             requestAnimationFrame(animateTrail);
         }
 
-        // Initiate Animation Loop immediately on load
+        const bakeries = [
+            { name: "태극당 장충본점", lat: 37.5592, lng: 127.0051, type: "classic", menu: "모나카 아이스크림, 야채사라다빵", desc: "1945년부터 자리를 지킨 서울에서 가장 오래된 살아있는 베이커리 전설.", addr: "중구 동호로 24길 7", emoji: "🏰" },
+            { name: "나폴레옹과자점 본점", lat: 37.5891, lng: 127.0076, type: "classic", menu: "사라다빵, 벌꿀 빵", desc: "한국 제과 명장의 전통을 지켜온 성북동 골목의 진정한 노포 제과점.", addr: "성북구 성북로 7", emoji: "🏰" },
+            { name: "리치몬드과자점 성산본점", lat: 37.5658, lng: 126.9142, type: "classic", menu: "밤식빵, 정통 슈크림", desc: "고풍스러운 연출과 수십 년 정통 레시피를 고수해 온 빵지순례 명가.", addr: "마포구 월드컵북로 86", emoji: "🏰" },
+            { name: "김영모과자점 서초동본점", lat: 37.4932, lng: 127.0141, type: "classic", menu: "바게트 샌드위치, 몽블랑", desc: "달콤하고 부드러운 몽블랑의 선두주자이자 고품격 빵의 대명사.", addr: "서초구 서초동 1335", emoji: "🏰" },
+            { name: "쟝블랑제리 낙성대점", lat: 37.4771, lng: 126.9634, type: "classic", menu: "맘모스빵, 묵직한 단팥빵", desc: "재료를 아끼지 않은 무거운 중량의 맘모스빵으로 유명한 백년가게.", addr: "관악구 낙성대역길 8", emoji: "🏰" },
+            { name: "피터팬1978 연희점", lat: 37.5678, lng: 126.9312, type: "classic", menu: "아기엉덩이빵, 쌀소금빵", desc: "연희동에서 40년 이상 따스한 로컬 빵집 명맥을 지키고 있는 노포.", addr: "서대문구 증가로 10", emoji: "🏰" },
+            { name: "프릳츠 도화점", lat: 37.5415, lng: 126.9482, type: "classic", menu: "실크단팥빵, 크루아상, 브루잉커피", desc: "한옥 마당 빈티지 감성과 고소한 소시지빵, 하이엔드 로스팅의 조화.", addr: "마포구 새창로2길 17", emoji: "☕" },
+            
+            { name: "런던 베이글 뮤지엄 안국", lat: 37.5793, lng: 126.9862, type: "trendy", menu: "포테이토 치즈 베이글, 브릭레인", desc: "전국에 크림치즈 베이글 열풍을 이끌어낸 극강의 이국적인 초핫플레이스.", addr: "종로구 북촌로4길 20", emoji: "🔥" },
+            { name: "아티스트 베이커리 안국", lat: 37.5768, lng: 126.9845, type: "trendy", menu: "수제 소금빵 에디션, 플레인 바게트", desc: "유럽 식료품점을 연상케 하는 다채로운 버터 소금빵 전문점.", addr: "종로구 율곡로 45", emoji: "🔥" },
+            { name: "어글리베이커리 망원", lat: 37.5559, lng: 126.9015, type: "trendy", menu: "대파빵, 단호박 맘모스, 크림빵", desc: "인스타그램 대기열의 성지. 터질 듯 가득 채워진 속재료의 풍미.", addr: "마포구 포은로 73", emoji: "🔥" },
+            { name: "올드페리도넛 한남점", lat: 37.5376, lng: 127.0020, type: "trendy", menu: "피넛버터 도넛, 버터피스타치오", desc: "묵직한 필링과 환상적인 비주얼을 자랑하는 서울의 대표 수제 도넛.", addr: "용산구 한남대로27길 66", emoji: "🔥" },
+            { name: "키에리 이태원점", lat: 37.5348, lng: 126.9950, type: "trendy", menu: "노버터 치즈케이크, 무설탕 스콘", desc: "건강함과 꾸덕한 식감을 동시에 잡은 알러지프리 홈메이드 케이크숍.", addr: "용산구 이태원로26길 16-8", emoji: "🔥" },
+            { name: "스코프 서촌점", lat: 37.5804, lng: 126.9701, type: "trendy", menu: "레몬 케이크, 브리티시 스콘", desc: "매장 문을 열자마자 달콤한 버터 향이 가득 퍼지는 영국식 스콘 맛집.", addr: "종로구 필운대로5가길 31", emoji: "🔥" },
+            { name: "코코로카라 연남본점", lat: 37.5645, lng: 126.9254, type: "trendy", menu: "바나나 브레드 푸딩, 말차푸딩", desc: "아기자기한 디저트 컵에 담긴 독창적인 브레드 푸딩 원조.", addr: "마포구 연남로1길 41", emoji: "🔥" },
+            { name: "어니언 성수", lat: 37.5444, lng: 127.0573, type: "trendy", menu: "팡도르, 고소한 소금빵", desc: "허물어진 벽과 녹슨 철문, 감성적인 공간 속 최고의 페이스트리.", addr: "성동구 아차산로9길 8", emoji: "🔥" },
+            { name: "카페 하이웨스트 익선점", lat: 37.5746, lng: 126.9904, type: "trendy", menu: "얼그레이 핑키케이크, 귀여운 스콘들", desc: "동화 속에 들어온 듯한 아기자기하고 러블리한 스콘 뷔페형 매장.", addr: "종로구 돈화문로11다길 18", emoji: "🔥" },
+            { name: "르솔레이 연희점", lat: 37.5684, lng: 126.9299, type: "trendy", menu: "클래식 버터 마들렌, 티 마들렌", desc: "프랑스 정통 구움과자 마들렌만을 파헤친 촉촉한 감성 명소.", addr: "서대문구 연희맛로 7-29", emoji: "🔥" },
+            { name: "라라브레드 송파점", lat: 37.5113, lng: 127.1042, type: "trendy", menu: "식빵 플래터, 아보카도 브런치", desc: "물감 모양 수제 잼을 칠해 먹는 유쾌하고 이색적인 베이커리 브런치 카페.", addr: "송파구 오금로16길 4", emoji: "🔥" },
+            
+            { name: "우스블랑 효창점", lat: 37.5401, lng: 126.9601, type: "artisan", menu: "갈레트 데 루아, 아몬드 크루아상", desc: "프랑스 정통 제빵 기술의 정수로 구워내는 담백한 아티장 식사빵 전문점.", addr: "용산구 효창원로70길 4", emoji: "🥐" },
+            { name: "브레드05 여의도점", lat: 37.5218, lng: 126.9298, type: "artisan", menu: "원조 앙버터, 깜빠뉴", desc: "대한민국에 '앙버터' 빵을 창시해 대성공을 거둔 역사적인 아티장 매장.", addr: "영등포구 국제금융로 86", emoji: "🥐" },
+            { name: "빵나무 홍대점", lat: 37.5582, lng: 126.9248, type: "artisan", menu: "생크림 앙금빵, 천연효모 호밀빵", desc: "건강한 천연발효종을 장시간 배양해 소화가 아주 잘 되는 유기농 빵집.", addr: "마포구 월드컵북로4길 30", emoji: "🥐" },
+            { name: "카멜리온 신정점", lat: 37.5191, lng: 126.8524, type: "artisan", menu: "수제 메론빵, 홍차 멜론 크림", desc: "일본 정통 스타일의 바삭하고 촉촉한 멜론빵 하나에 인생을 건 명소.", addr: "양천구 오목로 196", emoji: "🥐" },
+            { name: "밀도 성수점", lat: 37.5434, lng: 127.0423, type: "artisan", menu: "리치식빵, 미니 큐브 커스터드", desc: "그날의 온도, 습도에 맞추어 결대로 부드럽게 찢어지는 탕종식빵 전문점.", addr: "성동구 왕십리로 96", emoji: "🥐" },
+            { name: "꼼다비뛰드 역삼", lat: 37.5215, lng: 127.0224, type: "artisan", menu: "그릴 샌드위치, 구운 피낭시에", desc: "파삭한 바게트 샌드위치 하나로 이른 아침 웨이팅 대란을 일으킨 장인 빵집.", addr: "강남구 강남대로110길 62", emoji: "🥐" },
+            { name: "아오이토리 홍대", lat: 37.5548, lng: 126.9288, type: "artisan", menu: "야키소바빵, 명란바게트, 멜론빵", desc: "일본인 셰프 고바야시가 매일 아침 구워내는 이색 일본 조리빵 전문점.", addr: "마포구 와우산로29길 8", emoji: "🥐" },
+            { name: "쿄베이커리 상수본점", lat: 37.5482, lng: 126.9213, type: "artisan", menu: "하얀 시오빵, 바게트 연유", desc: "수년간 트렌디한 검정 먹물빵과 크루아상 연구를 주도해 온 상수동 골목 대장.", addr: "마포구 독막로 65", emoji: "🥐" },
+            { name: "타르틴베이커리 한남", lat: 37.5362, lng: 127.0084, type: "artisan", menu: "컨트리 브레드, 바나나 크림 파이", desc: "샌프란시스코 정통 사워도우 기술이 완벽히 정착된 웅장한 아티장 빵공장.", addr: "용산구 한남대로40길 26", emoji: "🥐" },
+            { name: "미니마이즈 한남점", lat: 37.5332, lng: 127.0041, type: "artisan", menu: "천연 쌀 소금빵, 저당 초코케이크", desc: "설탕을 극도로 배제하고 오직 쌀가루로 쫄깃한 비건 건강 소금빵을 구워내는 곳.", addr: "용산구 독서당로 65-1", emoji: "🥐" },
+            { name: "오드펠로우즈 마포", lat: 37.5412, lng: 126.9452, type: "artisan", menu: "비건 깜빠뉴, 천연 무화과 스프레드", desc: "자극적이지 않고 담백한 맛을 지향하는 웰빙 베이커리 매니아들의 비밀 성지.", addr: "마포구 도화길 32", emoji: "🥐" },
+            { name: "패션5 한남", lat: 37.5385, lng: 127.0006, type: "trendy", menu: "바닐라 푸딩, 프렌치 에클레어", desc: "최고급 식자재로 무장한 초호화 궁전 감성의 하이엔드 디저트 아지트.", addr: "용산구 이태원로 272", emoji: "👑" }
+        ];
+
+        let map;
+        let tileLayer;
+        let markers = {};
+        let currentCategory = 'all';
+        let searchQuery = '';
+
+        function initBakeryMap() {
+            // Initialize Leaflet Map centered on Seoul
+            map = L.map('bakery-map', {
+                center: [37.5565, 126.9780],
+                zoom: 11.5,
+                scrollWheelZoom: false // Prevent intrusive scrolling issues
+            });
+
+            // Set Initial Tile Layer based on active Body Theme
+            const isLight = document.body.classList.contains('light-mode');
+            setMapTheme(isLight);
+
+            // Populate Markers
+            refreshMapMarkers();
+            renderBakeryList();
+        }
+
+        function setMapTheme(isLight) {
+            if (tileLayer) {
+                map.removeLayer(tileLayer);
+            }
+
+            // Beautiful Map Skins matching light/dark modes
+            const tileUrl = isLight 
+                ? 'https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png' // Premium light cream
+                : 'https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png';         // Sleek dark matter
+
+            tileLayer = L.tileLayer(tileUrl, {
+                attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
+                subdomains: 'abcd',
+                maxZoom: 20
+            }).addTo(map);
+        }
+
+        // Generate Custom SVG/Emoji Div-Icon Pin for Leaflet
+        function createCustomPin(emoji) {
+            return L.divIcon({
+                html: `<div class="flex items-center justify-center w-8 h-8 rounded-full bg-butter border-2 border-[#1B4332] text-base shadow-lg animate-bounce hover:scale-110 transition-transform" style="animation-duration: 3.5s;">${emoji}</div>`,
+                className: 'custom-bakery-pin',
+                iconSize: [32, 32],
+                iconAnchor: [16, 32],
+                popupAnchor: [0, -32]
+            });
+        }
+
+        function getFilteredBakeries() {
+            return bakeries.filter(b => {
+                const matchesCat = currentCategory === 'all' || b.type === currentCategory;
+                const matchesSearch = b.name.toLowerCase().includes(searchQuery.toLowerCase()) || 
+                                      b.menu.toLowerCase().includes(searchQuery.toLowerCase()) ||
+                                      b.desc.toLowerCase().includes(searchQuery.toLowerCase());
+                return matchesCat && matchesSearch;
+            });
+        }
+
+        function refreshMapMarkers() {
+            // Remove existing markers
+            Object.values(markers).forEach(m => map.removeLayer(m));
+            markers = {};
+
+            const activeList = getFilteredBakeries();
+
+            activeList.forEach(bakery => {
+                const pin = createCustomPin(bakery.emoji);
+                const popupContent = `
+                    <div class="text-xs p-1 select-none leading-relaxed">
+                        <h5 class="text-sm font-black text-forest-dark flex items-center gap-1.5">
+                            <span>${bakery.name}</span>
+                        </h5>
+                        <span class="inline-block px-2 py-0.5 bg-amber-100 text-amber-800 text-[9px] rounded-full font-bold my-1 border border-amber-300">
+                            ${bakery.type === 'classic' ? '노포 명가 🏰' : bakery.type === 'trendy' ? '트렌디 핫플 🔥' : '아티장 베이커리 🥐'}
+                        </span>
+                        <p class="text-slate-600 font-medium leading-relaxed my-1.5">${bakery.desc}</p>
+                        <div class="mt-1.5 p-1.5 bg-emerald-50 rounded border border-emerald-100 text-[10px] text-emerald-800 leading-normal">
+                            ⭐ 최애픽: <strong>${bakery.menu}</strong>
+                        </div>
+                        <p class="text-[9px] text-slate-400 mt-2">📍 주소: ${bakery.addr}</p>
+                    </div>
+                `;
+
+                const marker = L.marker([bakery.lat, bakery.lng], { icon: pin })
+                    .bindPopup(popupContent)
+                    .addTo(map);
+
+                markers[bakery.name] = marker;
+            });
+        }
+
+        // Render Sidebar Cards List
+        function renderBakeryList() {
+            const listContainer = document.getElementById('bakery-list');
+            listContainer.innerHTML = '';
+
+            const activeList = getFilteredBakeries();
+
+            if (activeList.length === 0) {
+                listContainer.innerHTML = `
+                    <div class="text-center py-12 text-xs theme-text-muted">
+                        🔍 검색 조건에 일치하는 빵집이 없습니다.<br>
+                        다른 단어로 찾아보세요!
+                    </div>
+                `;
+                return;
+            }
+
+            activeList.forEach((bakery, index) => {
+                const card = document.createElement('div');
+                card.className = `bakery-item p-4 rounded-2xl border theme-border theme-bg-card hover:border-butter transition-all duration-300 cursor-pointer hover:scale-[1.02] flex items-start gap-3 select-none`;
+                card.onclick = () => focusOnBakery(bakery, card);
+
+                card.innerHTML = `
+                    <div class="w-10 h-10 rounded-xl theme-bg-section border theme-border flex items-center justify-center text-xl shadow-inner">
+                        ${bakery.emoji}
+                    </div>
+                    <div class="flex-1 min-w-0 space-y-1">
+                        <div class="flex items-center justify-between">
+                            <h4 class="text-xs font-black theme-text-main truncate">${bakery.name}</h4>
+                            <span class="text-[8px] px-1.5 py-0.5 rounded-md ${
+                                bakery.type === 'classic' ? 'bg-amber-500/10 text-butter' : 
+                                bakery.type === 'trendy' ? 'bg-emerald-500/10 text-emerald-400' : 'bg-sky-500/10 text-sky-400'
+                            }">${bakery.type.toUpperCase()}</span>
+                        </div>
+                        <p class="text-[10px] theme-text-muted truncate">${bakery.desc}</p>
+                        <p class="text-[10px] text-butter font-semibold truncate">🥐 ${bakery.menu}</p>
+                    </div>
+                `;
+
+                listContainer.appendChild(card);
+            });
+        }
+
+        // Fly camera to marker on Click
+        function focusOnBakery(bakery, cardElement) {
+            // Remove previous active highlights
+            document.querySelectorAll('.bakery-item').forEach(item => {
+                item.classList.remove('border-butter', 'shadow-lg');
+            });
+
+            // Highlight current clicked sidebar
+            cardElement.classList.add('border-butter', 'shadow-lg');
+
+            // Smooth zoom map camera
+            map.flyTo([bakery.lat, bakery.lng], 16, {
+                animate: true,
+                duration: 1.2
+            });
+
+            // Delay and open popup for aesthetic focus
+            setTimeout(() => {
+                const marker = markers[bakery.name];
+                if (marker) {
+                    marker.openPopup();
+                }
+            }, 1200);
+        }
+
+        function filterBakeries() {
+            searchQuery = document.getElementById('bakery-search').value;
+            refreshMapMarkers();
+            renderBakeryList();
+        }
+
+        function setBakeryCategory(category) {
+            currentCategory = category;
+
+            // Toggle Active Button Styles
+            const categories = ['all', 'classic', 'trendy', 'artisan'];
+            categories.forEach(cat => {
+                const btn = document.getElementById(`btn-cat-${cat}`);
+                if (cat === category) {
+                    btn.className = "text-[10px] bg-butter text-forest-dark font-extrabold px-3 py-1.5 rounded-xl transition shadow-sm";
+                } else {
+                    btn.className = "text-[10px] theme-bg-section theme-text-sub border theme-border font-bold px-3 py-1.5 rounded-xl transition shadow-sm hover:text-butter";
+                }
+            });
+
+            refreshMapMarkers();
+            renderBakeryList();
+            
+            // Re-center map to view whole region on category change
+            map.setView([37.5565, 126.9780], 11.5);
+        }
+
+        // Initiate Animation Loop & Maps immediately on load
         window.onload = function() {
             animateTrail();
+            initBakeryMap();
         };
     </script>
 </body>
