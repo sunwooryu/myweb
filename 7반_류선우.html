@@ -6,7 +6,7 @@
     <title>반전 매력의 SSAFY인 | 자기소개</title>
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Google Fonts: Pretendard 대체용 프리미엄 산세리프 및 고딕 조합 -->
+    <!-- Google Fonts: Noto Sans KR 프리미엄 산세리프 및 고딕 조합 -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&display=swap" rel="stylesheet">
@@ -101,7 +101,10 @@
         }
     </style>
 </head>
-<body class="theme-bg-main theme-text-main min-h-screen selection:bg-amber-400 selection:text-forest-dark">
+<body class="theme-bg-main theme-text-main min-h-screen selection:bg-amber-400 selection:text-forest-dark overflow-x-hidden">
+
+    <!-- Interactive Star Dust Trail Canvas -->
+    <canvas id="trail-canvas" class="fixed inset-0 pointer-events-none z-[9999]"></canvas>
 
     <!-- Navigation Header -->
     <header class="fixed top-0 left-0 w-full theme-nav-bg backdrop-blur-md z-50 border-b theme-border transition-colors duration-400">
@@ -120,13 +123,11 @@
                 <a href="#guestbook" class="hover:text-butter transition">네트워킹 보드</a>
             </nav>
             <div class="flex items-center gap-3">
-                <!-- 테마 토글 버튼 -->
+                <!-- 테마 토글 버튼 (다크/라이트모드) -->
                 <button id="theme-toggle" class="p-2 rounded-full theme-bg-card border theme-border text-butter hover:scale-110 active:scale-95 transition-all shadow-md flex items-center justify-center w-10 h-10" aria-label="테마 전환 버튼">
-                    <!-- Sun Icon (라이트모드로 변경할 때 보여짐 / 현재 다크모드) -->
                     <svg id="theme-icon-sun" class="w-5 h-5 block" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364-6.364l-.707.707M6.343 17.657l-.707.707m12.728 0l-.707-.707M6.343 6.364l-.707-.707M12 8a4 4 0 100 8 4 4 0 000-8z" />
                     </svg>
-                    <!-- Moon Icon (다크모드로 변경할 때 보여짐 / 현재 라이트모드) -->
                     <svg id="theme-icon-moon" class="w-5 h-5 hidden" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
                     </svg>
@@ -552,7 +553,7 @@
         let currentStamina = 60;
         function chargeStamina() {
             if (currentStamina >= 100) {
-                alertCustomMessage("⚡ 이미 마라토너 수준의 최고 충전 상태(100%)입니다! 언제든 출격할 준비 완료!");
+                alertCustomMessage("⚡ 이미 최고 충전 상태(100%)입니다! 언제든 출격할 준비 완료!");
                 return;
             }
             currentStamina += 10;
@@ -562,13 +563,13 @@
             document.getElementById('stamina-bar').style.width = `${currentStamina}%`;
 
             if (currentStamina === 100) {
-                alertCustomMessage("🏋️‍♂️ 운동으로 풀 충전 완료! 에러 해결 버프 및 코딩 지속 스태미나가 200% 상승했습니다.");
+                alertCustomMessage("🏋️‍♂️ 운동으로 완벽 충전! 에러 해결 버프 및 피지컬이 200% 상승했습니다.");
             }
         }
 
-        // Custom Inline message popup to bypass alert() constraints
+        // Custom Toast Alert Message Popup
         function alertCustomMessage(message) {
-            // Remove existing toasts first to prevent overlap
+            // Clear existing toasts to prevent overlaps
             const existingToasts = document.querySelectorAll('.custom-toast');
             existingToasts.forEach(t => t.remove());
 
@@ -702,6 +703,118 @@
                 }[tag] || tag)
             );
         }
+
+        // 5. High-Performance Interactive Star Dust Trail Logic
+        const canvas = document.getElementById('trail-canvas');
+        const ctx = canvas.getContext('2d');
+        let particles = [];
+
+        // Resize Canvas to fully fit window viewports
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+        window.addEventListener('resize', resizeCanvas);
+        resizeCanvas();
+
+        // Particle Blueprint class definition
+        class StarParticle {
+            constructor(x, y) {
+                this.x = x;
+                this.y = y;
+                // Randomized spread movement
+                this.vx = (Math.random() - 0.5) * 2.2;
+                this.vy = (Math.random() - 0.5) * 2.2 - 0.8; // Tendency to drift slightly upwards like dust
+                
+                // Beautiful Theme Colors: Gold (#E9C46A) or Emerald Green
+                const colors = ['#E9C46A', '#10B981', '#34D399', '#F59E0B'];
+                this.color = colors[Math.floor(Math.random() * colors.length)];
+                
+                this.size = Math.random() * 4 + 1.5;
+                this.alpha = 1.0;
+                this.decay = Math.random() * 0.015 + 0.01; // Gradually fades out
+                this.rotation = Math.random() * Math.PI;
+                this.spin = (Math.random() - 0.5) * 0.05;
+                this.sparkleType = Math.random() > 0.4 ? 'circle' : 'star'; // 40% chance of star shape
+            }
+
+            update() {
+                this.x += this.vx;
+                this.y += this.vy;
+                this.alpha -= this.decay;
+                this.rotation += this.spin;
+            }
+
+            draw() {
+                ctx.save();
+                ctx.globalAlpha = this.alpha;
+                ctx.translate(this.x, this.y);
+                ctx.rotate(this.rotation);
+                ctx.fillStyle = this.color;
+                
+                // Draw soft blur glow effect
+                ctx.shadowBlur = 8;
+                ctx.shadowColor = this.color;
+
+                if (this.sparkleType === 'star') {
+                    // Draw a beautiful 4-pointed sparkle
+                    ctx.beginPath();
+                    for (let i = 0; i < 4; i++) {
+                        ctx.lineTo(0, -this.size * 1.5);
+                        ctx.rotate(Math.PI / 2);
+                    }
+                    ctx.closePath();
+                    ctx.fill();
+                } else {
+                    // Draw glowing micro dust
+                    ctx.beginPath();
+                    ctx.arc(0, 0, this.size, 0, Math.PI * 2);
+                    ctx.fill();
+                }
+                ctx.restore();
+            }
+        }
+
+        // Spawn logic triggers on Mouse moves
+        function spawnTrailParticles(x, y) {
+            // Spawn 2-3 particles per move for ideal density
+            for (let i = 0; i < 3; i++) {
+                particles.push(new StarParticle(x, y));
+            }
+        }
+
+        window.addEventListener('mousemove', (e) => {
+            spawnTrailParticles(e.clientX, e.clientY);
+        });
+
+        // Touch support for Mobile Devices
+        window.addEventListener('touchmove', (e) => {
+            if (e.touches.length > 0) {
+                spawnTrailParticles(e.touches[0].clientX, e.touches[0].clientY);
+            }
+        }, { passive: true });
+
+        // Animation Loop
+        function animateTrail() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            
+            for (let i = particles.length - 1; i >= 0; i--) {
+                const p = particles[i];
+                p.update();
+                p.draw();
+                
+                // Remove fully faded out particles
+                if (p.alpha <= 0) {
+                    particles.splice(i, 1);
+                }
+            }
+            requestAnimationFrame(animateTrail);
+        }
+
+        // Initiate Animation Loop immediately on load
+        window.onload = function() {
+            animateTrail();
+        };
     </script>
 </body>
 </html>
