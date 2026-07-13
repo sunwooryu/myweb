@@ -1,0 +1,616 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>반전 매력의 SSAFY인 | 자기소개</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Pretendard 대체용 프리미엄 산세리프 및 고딕 조합 -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Noto Sans KR', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            scroll-behavior: smooth;
+        }
+        /* Custom Colors & Utilities */
+        .color-forest { color: #1B4332; }
+        .bg-forest { background-color: #1B4332; }
+        .bg-forest-dark { background-color: #0B2519; }
+        .bg-butter { background-color: #E9C46A; }
+        .border-butter { border-color: #E9C46A; }
+        .text-butter { color: #E9C46A; }
+        
+        /* Smooth Scale Transition */
+        .hover-card {
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        .hover-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.3), 0 10px 10px -5px rgba(0, 0, 0, 0.2);
+        }
+        
+        /* Bread Spin / Float Animation */
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-10px) rotate(5deg); }
+        }
+        .animate-float {
+            animation: float 4s ease-in-out infinite;
+        }
+        
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0B2519;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #1B4332;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #E9C46A;
+        }
+    </style>
+</head>
+<body class="bg-forest-dark text-slate-100 min-h-screen selection:bg-amber-400 selection:text-forest-dark">
+
+    <!-- Navigation Header -->
+    <header class="fixed top-0 left-0 w-full bg-forest-dark/85 backdrop-blur-md z-50 border-b border-emerald-900/40">
+        <div class="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
+            <a href="#" class="text-butter font-bold text-xl tracking-wider flex items-center gap-2">
+                <svg class="w-6 h-6 animate-float" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M16.88 2.88a1.25 1.25 0 0 0-1.77 0L6.7 11.29a.996.996 0 0 0 0 1.41l8.41 8.41c.49.49 1.28.49 1.77 0s.49-1.28 0-1.77L9.18 12l7.7-7.35a1.25 1.25 0 0 0 0-1.77z"/>
+                    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z"/>
+                </svg>
+                ANALYST & RUNNER
+            </a>
+            <nav class="hidden md:flex items-center gap-8 text-sm font-medium text-slate-300">
+                <a href="#about" class="hover:text-butter transition">소개</a>
+                <a href="#strengths" class="hover:text-butter transition">반전 강점</a>
+                <a href="#soul-taste" class="hover:text-butter transition">취향 밀착</a>
+                <a href="#guestbook" class="hover:text-butter transition">네트워킹 보드</a>
+            </nav>
+            <a href="#guestbook" class="bg-butter text-forest-dark px-4 py-2 rounded-full font-semibold text-xs tracking-wide hover:bg-amber-300 transition-transform active:scale-95 shadow-lg shadow-amber-500/10">
+                가볍게 말걸기 💬
+            </a>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="relative min-h-screen flex items-center justify-center pt-24 pb-12 overflow-hidden px-6">
+        <!-- Background decorative elements -->
+        <div class="absolute -top-40 -right-40 w-96 h-96 bg-emerald-800/10 rounded-full filter blur-3xl"></div>
+        <div class="absolute -bottom-40 -left-40 w-96 h-96 bg-amber-500/5 rounded-full filter blur-3xl"></div>
+
+        <div class="max-w-6xl w-full grid grid-cols-1 lg:grid-cols-12 gap-12 items-center relative z-10">
+            <!-- Hero Text -->
+            <div class="lg:col-span-7 space-y-6 text-left">
+                <div class="inline-flex items-center gap-2 bg-emerald-950/80 border border-emerald-800/60 px-3.5 py-1.5 rounded-full text-xs text-butter font-semibold">
+                    <span class="flex h-2 w-2 relative">
+                        <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-amber-400 opacity-75"></span>
+                        <span class="relative inline-flex rounded-full h-2 w-2 bg-amber-500"></span>
+                    </span>
+                    SSAFY 13기 동료들을 위한 웰컴 페이지
+                </div>
+                
+                <h1 class="text-3xl md:text-4xl lg:text-5xl font-extrabold leading-tight text-slate-50">
+                    <span class="text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 via-amber-300 to-amber-500 block mb-2">이성적인 데이터 분석</span>
+                    <span class="text-transparent bg-clip-text bg-gradient-to-r from-amber-300 to-emerald-400">단단한 체력</span>, 그리고<br>
+                    <span class="text-slate-100">달콤한 빵을 사랑하는</span><br>
+                    반전 매력의 SSAFY인입니다.
+                </h1>
+
+                <p class="text-base md:text-lg text-slate-300 leading-relaxed max-w-2xl">
+                    응용통계학의 예리한 논리 구조 위에 코드를 얹고, 튼튼한 체력 엔진으로 끝까지 몰입합니다. 
+                    지칠 때는 달콤한 소금빵 하나에 행복해하는 열린 소통가예요!
+                </p>
+
+                <!-- Dynamic HashTags -->
+                <div class="flex flex-wrap gap-2 pt-2">
+                    <span class="bg-forest px-3 py-1 rounded-md text-xs text-emerald-300 border border-emerald-800/30">#응용통계학</span>
+                    <span class="bg-forest px-3 py-1 rounded-md text-xs text-emerald-300 border border-emerald-800/30">#체력마라토너</span>
+                    <span class="bg-forest px-3 py-1 rounded-md text-xs text-emerald-300 border border-emerald-800/30">#빵지순례자</span>
+                    <span class="bg-forest px-3 py-1 rounded-md text-xs text-emerald-300 border border-emerald-800/30">#노동요디제이</span>
+                </div>
+
+                <!-- Hero Buttons -->
+                <div class="flex flex-wrap gap-4 pt-4">
+                    <a href="#strengths" class="bg-butter hover:bg-amber-400 text-forest-dark font-bold px-6 py-3.5 rounded-xl transition duration-300 flex items-center gap-2 shadow-lg shadow-amber-500/10">
+                        저의 강점 알아보기
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 13l-7 7-7-7m14-6l-7 7-7-7"/></svg>
+                    </a>
+                    <a href="#soul-taste" class="bg-emerald-900/30 hover:bg-emerald-900/50 text-slate-200 border border-emerald-700/50 font-semibold px-6 py-3.5 rounded-xl transition duration-300">
+                        취미 & 취향 훔쳐보기
+                    </a>
+                </div>
+            </div>
+
+            <!-- Hero Interactive Graphic -->
+            <div class="lg:col-span-5 flex justify-center items-center">
+                <div class="relative w-80 h-80 md:w-96 md:h-96 flex items-center justify-center">
+                    <!-- Spinning Aura -->
+                    <div class="absolute inset-0 border border-dashed border-emerald-700/40 rounded-full animate-[spin_40s_linear_infinite]"></div>
+                    <div class="absolute inset-6 border border-dashed border-amber-500/25 rounded-full animate-[spin_20s_linear_infinite_reverse]"></div>
+                    
+                    <!-- Main Avatar Frame -->
+                    <div class="relative w-64 h-64 md:w-72 md:h-72 bg-gradient-to-tr from-emerald-950 to-emerald-900 border-4 border-emerald-800/60 rounded-full overflow-hidden shadow-2xl flex flex-col items-center justify-center text-center p-6 group hover:border-butter transition-all duration-500">
+                        <!-- Custom SVG Vector Character representation -->
+                        <svg class="w-32 h-32 text-emerald-300 group-hover:scale-105 transition-transform duration-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9.813 15.904L9 21m0 0l-.813-5.096M9 21h3m-3.405-12.006a5.002 5.002 0 019.81 0M15 11h.01M9 11h.01M12 12h.01M12 16h.01M10 16h.01M14 16h.01M16.24 16.24a6 6 0 11-8.484 0L12 12l4.24 4.24z" />
+                        </svg>
+                        <h3 class="text-xl font-bold mt-4 text-butter">반전 가득한 예비 개발자</h3>
+                        <p class="text-xs text-slate-400 mt-1">마우스를 올려 상호작용 해보세요!</p>
+
+                        <!-- Float elements absolute within group -->
+                        <div class="absolute top-8 left-10 text-3xl animate-bounce" style="animation-duration: 2.5s;">📊</div>
+                        <div class="absolute bottom-10 right-10 text-3xl animate-bounce" style="animation-duration: 3s;">🥐</div>
+                        <div class="absolute top-1/2 right-4 text-2xl animate-float">🏃</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Quick Intro Section -->
+    <section id="about" class="py-20 bg-forest relative border-y border-emerald-900">
+        <div class="max-w-4xl mx-auto px-6 text-center space-y-6">
+            <h2 class="text-sm font-semibold tracking-widest text-butter uppercase">ABOUT ME</h2>
+            <p class="text-2xl md:text-3xl font-bold leading-relaxed text-slate-100">
+                "이성과 감성, 그리고 체력이 <br class="md:hidden">환상적인 밸런스를 이룹니다."
+            </p>
+            <p class="text-slate-300 leading-relaxed text-base max-w-2xl mx-auto">
+                데이터에서 진실을 찾는 통계 분석 능력과 고강도 덤벨 및 러닝으로 무장한 몸으로, 어떤 어려운 트러블 슈팅도 마라톤 완주하듯 차분하게 해결합니다. SSAFY 동료들과 기분 좋은 성장 에너지를 나누는 러닝메이트가 될 준비가 되어 있습니다!
+            </p>
+        </div>
+    </section>
+
+    <!-- Strengths Grid Section -->
+    <section id="strengths" class="py-24 max-w-6xl mx-auto px-6">
+        <div class="text-center space-y-4 mb-16">
+            <h2 class="text-xs font-semibold tracking-widest text-butter uppercase">CORE VALUE</h2>
+            <p class="text-3xl md:text-4xl font-extrabold text-slate-50">저를 가장 잘 표현하는 세 가지 매력</p>
+            <p class="text-slate-400 max-w-lg mx-auto text-sm">탄탄한 이론적 정교함부터 압도적인 끈기, 스스럼없는 인간미까지 다 갖추었습니다.</p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <!-- Card 1: Brain -->
+            <div class="bg-emerald-950/45 border border-emerald-800/40 rounded-3xl p-8 hover-card flex flex-col justify-between group">
+                <div class="space-y-4">
+                    <div class="w-12 h-12 rounded-2xl bg-emerald-900/50 flex items-center justify-center text-butter text-2xl font-bold border border-emerald-800/50">
+                        🧠
+                    </div>
+                    <h3 class="text-xl font-bold text-slate-100 group-hover:text-butter transition">이성적인 머리 (Brain)</h3>
+                    <p class="text-sm text-slate-300 leading-relaxed">
+                        응용통계학 전공자로서 복잡한 알고리즘이나 코드 설계 구조를 구조적이고 논리적으로 사고하는 데 최적화되어 있습니다. 직관에만 의존하지 않고 데이터를 기반으로 가설을 입증하고 최적의 솔루션을 찾아냅니다.
+                    </p>
+                </div>
+                <!-- Interactive Chart Simulator -->
+                <div class="mt-6 pt-6 border-t border-emerald-900/50 space-y-3">
+                    <span class="text-xs text-butter font-semibold">실시간 통계 수치 시뮬레이션</span>
+                    <div class="h-16 flex items-end justify-between gap-1 bg-emerald-950/80 rounded-lg p-2.5 relative overflow-hidden" id="chart-container">
+                        <div class="w-full bg-emerald-800 rounded-sm transition-all duration-300" style="height: 40%"></div>
+                        <div class="w-full bg-emerald-700 rounded-sm transition-all duration-300" style="height: 60%"></div>
+                        <div class="w-full bg-butter rounded-sm transition-all duration-300" style="height: 85%"></div>
+                        <div class="w-full bg-emerald-700 rounded-sm transition-all duration-300" style="height: 50%"></div>
+                        <div class="w-full bg-emerald-800 rounded-sm transition-all duration-300" style="height: 75%"></div>
+                        <div class="w-full bg-butter rounded-sm transition-all duration-300" style="height: 95%"></div>
+                    </div>
+                    <button onclick="randomizeChart()" class="text-[10px] bg-emerald-900/50 hover:bg-emerald-800/60 text-emerald-300 px-2 py-1 rounded border border-emerald-800/40 w-full transition">변수 변경 및 재분석 실행 ⚡</button>
+                </div>
+            </div>
+
+            <!-- Card 2: Body -->
+            <div class="bg-emerald-950/45 border border-emerald-800/40 rounded-3xl p-8 hover-card flex flex-col justify-between group">
+                <div class="space-y-4">
+                    <div class="w-12 h-12 rounded-2xl bg-emerald-900/50 flex items-center justify-center text-butter text-2xl font-bold border border-emerald-800/50">
+                        ⚡
+                    </div>
+                    <h3 class="text-xl font-bold text-slate-100 group-hover:text-butter transition">지치지 않는 몸 (Body)</h3>
+                    <p class="text-sm text-slate-300 leading-relaxed">
+                        웨이트 트레이닝, 러닝, 그리고 등산으로 한계에 도전해 온 완벽한 피지컬을 자랑합니다. 밤샘 디버깅이나 촉박한 마감에도 절대 지치지 않으며, 강력한 에너지로 지친 팀의 중심을 굳건하게 지켜줄 수 있습니다.
+                    </p>
+                </div>
+                <!-- Interactive Stamina Charger -->
+                <div class="mt-6 pt-6 border-t border-emerald-900/50 space-y-3">
+                    <div class="flex justify-between items-center text-xs">
+                        <span class="text-butter font-semibold">체력 게이지 상태</span>
+                        <span class="text-emerald-300 font-bold" id="stamina-percent">60%</span>
+                    </div>
+                    <div class="w-full bg-emerald-950 rounded-full h-4 overflow-hidden border border-emerald-900/60 p-0.5">
+                        <div id="stamina-bar" class="bg-gradient-to-r from-emerald-600 to-amber-400 h-full rounded-full transition-all duration-300" style="width: 60%"></div>
+                    </div>
+                    <button onclick="chargeStamina()" class="text-xs bg-butter text-forest-dark font-bold py-1.5 rounded w-full hover:bg-amber-400 transition-transform active:scale-95">체력 보충 운동하기 🏋️‍♂️</button>
+                </div>
+            </div>
+
+            <!-- Card 3: Soul -->
+            <div class="bg-emerald-950/45 border border-emerald-800/40 rounded-3xl p-8 hover-card flex flex-col justify-between group">
+                <div class="space-y-4">
+                    <div class="w-12 h-12 rounded-2xl bg-emerald-900/50 flex items-center justify-center text-butter text-2xl font-bold border border-emerald-800/50">
+                        🥐
+                    </div>
+                    <h3 class="text-xl font-bold text-slate-100 group-hover:text-butter transition">인간적인 영혼 (Soul)</h3>
+                    <p class="text-sm text-slate-300 leading-relaxed">
+                        빵지순례와 샤브샤브에 아주 진심인 친근하고 사교성 넘치는 팀원입니다. 팀원들과의 맛있는 식사 시간을 기획하고 촉촉한 소금빵을 공유하며 서먹한 팀 분위기를 단번에 유쾌하게 전환하는 데 뛰어난 재능이 있습니다.
+                    </p>
+                </div>
+                <!-- Food / Mood Preferences -->
+                <div class="mt-6 pt-6 border-t border-emerald-900/50 space-y-2">
+                    <span class="text-xs text-butter font-semibold">최애 소울푸드 스코어</span>
+                    <div class="grid grid-cols-2 gap-2 text-[11px]">
+                        <div class="bg-emerald-950 p-2 rounded border border-emerald-900/50 text-center">
+                            <span class="block text-base">🥐</span>
+                            <span class="font-bold text-slate-200">소금빵 & 맘모스빵</span>
+                            <span class="text-[9px] text-amber-400 block mt-0.5">최상급 애정도</span>
+                        </div>
+                        <div class="bg-emerald-950 p-2 rounded border border-emerald-900/50 text-center">
+                            <span class="block text-base">🍲</span>
+                            <span class="font-bold text-slate-200">소고기 샤브샤브</span>
+                            <span class="text-[9px] text-amber-400 block mt-0.5">해장 및 고정메뉴</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Deep Dive Interests & Playlists (Soul & Taste) -->
+    <section id="soul-taste" class="py-24 bg-forest/30 border-y border-emerald-950">
+        <div class="max-w-6xl mx-auto px-6">
+            <div class="text-center space-y-4 mb-16">
+                <h2 class="text-xs font-semibold tracking-widest text-butter uppercase">PLAYLISTS & BREADS</h2>
+                <p class="text-3xl md:text-4xl font-extrabold text-slate-50">저의 취향 도감 & 코딩 메이트</p>
+                <p class="text-slate-400 max-w-lg mx-auto text-sm">제가 평소 귀를 기울이는 소리와 입을 즐겁게 하는 맛의 조합입니다.</p>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+                <!-- Music Jukebox Playlist Widget -->
+                <div class="bg-emerald-950/80 border border-emerald-800/40 rounded-3xl p-8 space-y-6">
+                    <div class="flex items-center justify-between">
+                        <div class="space-y-1">
+                            <h3 class="text-lg font-bold text-slate-100">💻 SSAFY 노동요 주크박스</h3>
+                            <p class="text-xs text-slate-400">제가 가장 좋아하는 집중용 음반 목록</p>
+                        </div>
+                        <span class="text-3xl animate-[spin_6s_linear_infinite]" id="music-vinyl">📻</span>
+                    </div>
+
+                    <!-- Audio UI Display -->
+                    <div class="bg-forest-dark/80 rounded-2xl p-4 flex items-center gap-4 border border-emerald-900/50">
+                        <div class="w-12 h-12 rounded-xl bg-butter text-forest-dark flex items-center justify-center font-extrabold text-xl shadow-lg" id="current-track-emoji">
+                            🎧
+                        </div>
+                        <div class="flex-1 min-w-0">
+                            <div class="text-sm font-bold text-slate-100 truncate" id="current-track-title">집중력을 높여주는 로파이 비트</div>
+                            <div class="text-xs text-slate-400 truncate" id="current-track-artist">가장 추천하는 집중 플레이리스트</div>
+                        </div>
+                        <button onclick="toggleMusicPlay()" class="w-10 h-10 rounded-full bg-butter hover:bg-amber-400 text-forest-dark flex items-center justify-center font-bold text-sm transition" id="play-button">
+                            ▶
+                        </button>
+                    </div>
+
+                    <!-- Visualizer Mock -->
+                    <div class="h-8 flex items-end justify-center gap-[3px] py-1 bg-forest-dark/30 rounded-lg px-4" id="visualizer">
+                        <div class="w-1 bg-emerald-800 rounded-full transition-all duration-300" style="height: 10%"></div>
+                        <div class="w-1 bg-emerald-700 rounded-full transition-all duration-300" style="height: 10%"></div>
+                        <div class="w-1 bg-butter rounded-full transition-all duration-300" style="height: 10%"></div>
+                        <div class="w-1 bg-emerald-600 rounded-full transition-all duration-300" style="height: 10%"></div>
+                        <div class="w-1 bg-emerald-700 rounded-full transition-all duration-300" style="height: 10%"></div>
+                        <div class="w-1 bg-butter rounded-full transition-all duration-300" style="height: 10%"></div>
+                        <div class="w-1 bg-emerald-800 rounded-full transition-all duration-300" style="height: 10%"></div>
+                    </div>
+
+                    <!-- Playlist Selection -->
+                    <div class="space-y-2">
+                        <button onclick="selectTrack(1)" class="w-full text-left p-3 rounded-xl bg-forest/20 hover:bg-forest/40 border border-emerald-900/30 text-xs flex items-center justify-between text-slate-300 hover:text-white transition">
+                            <span>1. 코딩 중 극강 몰입 로파이 🎧</span>
+                            <span class="text-[10px] text-butter">추천곡</span>
+                        </button>
+                        <button onclick="selectTrack(2)" class="w-full text-left p-3 rounded-xl bg-forest/20 hover:bg-forest/40 border border-emerald-900/30 text-xs flex items-center justify-between text-slate-300 hover:text-white transition">
+                            <span>2. 웨이트 & 러닝용 빠른 일렉트로닉 ⚡</span>
+                            <span class="text-[10px] text-butter">텐션 충전</span>
+                        </button>
+                        <button onclick="selectTrack(3)" class="w-full text-left p-3 rounded-xl bg-forest/20 hover:bg-forest/40 border border-emerald-900/30 text-xs flex items-center justify-between text-slate-300 hover:text-white transition">
+                            <span>3. 등산 후 정상에서 듣는 상쾌한 인디 ⛰️</span>
+                            <span class="text-[10px] text-butter">힐링 트랙</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Bread Guide / Recommended Bakery List -->
+                <div class="bg-emerald-950/80 border border-emerald-800/40 rounded-3xl p-8 space-y-6">
+                    <div class="space-y-1">
+                        <h3 class="text-lg font-bold text-slate-100">🥖 빵돌이/빵순이 전용 빵 도감</h3>
+                        <p class="text-xs text-slate-400">빵에 관해서라면 대화가 마르지 않습니다.</p>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div class="bg-forest/35 border border-emerald-800/30 p-4 rounded-2xl hover:border-butter transition-colors">
+                            <span class="text-3xl block mb-2">🥐</span>
+                            <h4 class="font-bold text-sm text-slate-100 mb-1">소금빵</h4>
+                            <p class="text-xs text-slate-400 leading-relaxed">바삭한 겉면과 촉촉한 버터 홀의 조화, 그리고 짭조름한 소금 알갱이가 머리를 단숨에 맑게 해 줍니다.</p>
+                        </div>
+                        <div class="bg-forest/35 border border-emerald-800/30 p-4 rounded-2xl hover:border-butter transition-colors">
+                            <span class="text-3xl block mb-2">🍞</span>
+                            <h4 class="font-bold text-sm text-slate-100 mb-1">맘모스빵</h4>
+                            <p class="text-xs text-slate-400 leading-relaxed">소보로의 바삭함 속에 딸기잼, 크림, 단팥, 밤 등이 겹겹이 쌓인 풍성함! 한 조각만 먹어도 에너지가 폭발합니다.</p>
+                        </div>
+                    </div>
+
+                    <div class="bg-butter/10 border border-butter/30 p-4 rounded-2xl flex items-start gap-3">
+                        <span class="text-xl">💡</span>
+                        <div class="text-xs text-amber-100 space-y-1">
+                            <strong class="block">전국구 빵 맛집 추천 가능!</strong>
+                            <span>"지역 불문 최애 빵집 리스트를 대량 보유하고 있어요. 소통 첫날, 빵 취향이나 좋아하는 빵집 이야기로 자연스럽게 친근함을 나눠주세요!"</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Social Interactive Networking Board (Guestbook / virtual board) -->
+    <section id="guestbook" class="py-24 max-w-4xl mx-auto px-6">
+        <div class="text-center space-y-4 mb-16">
+            <h2 class="text-xs font-semibold tracking-widest text-butter uppercase">NETWORKING BOARD</h2>
+            <p class="text-3xl md:text-4xl font-extrabold text-slate-50">실시간 가상 소통 보드 💬</p>
+            <p class="text-slate-400 max-w-lg mx-auto text-sm">첫날 가벼운 한마디나, 저에게 추천하고 싶은 맛집/노래가 있다면 적어주세요!</p>
+        </div>
+
+        <div class="bg-emerald-950/45 border border-emerald-800/40 rounded-3xl p-6 md:p-8 space-y-8 shadow-xl">
+            <!-- Form -->
+            <form id="board-form" onsubmit="addStickyNote(event)" class="space-y-4">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-300 mb-2">당신의 이름 또는 닉네임</label>
+                        <input type="text" id="note-author" required placeholder="예: 코딩꿈나무, 길동이" class="w-full bg-forest-dark border border-emerald-800/60 rounded-xl px-4 py-3 text-sm text-slate-100 focus:outline-none focus:border-butter transition">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-300 mb-2">선물하고 싶은 아이콘</label>
+                        <select id="note-emoji" class="w-full bg-forest-dark border border-emerald-800/60 rounded-xl px-4 py-3 text-sm text-slate-100 focus:outline-none focus:border-butter transition">
+                            <option value="🥐">🥐 맛있는 빵 선물</option>
+                            <option value="☕">☕ 따뜻한 커피 한 잔</option>
+                            <option value="🍲">🍲 샤브샤브 응원</option>
+                            <option value="⚡">⚡ 응원의 에너지 파동</option>
+                        </select>
+                    </div>
+                </div>
+                <div>
+                    <label class="block text-xs font-semibold text-slate-300 mb-2">응원 메시지 및 건네는 말</label>
+                    <textarea id="note-content" required rows="3" placeholder="예: '러닝 좋아하시는군요! 다음에 운동 메이트 해요.', '빵집 추천해주세요!'" class="w-full bg-forest-dark border border-emerald-800/60 rounded-xl p-4 text-sm text-slate-100 focus:outline-none focus:border-butter transition"></textarea>
+                </div>
+                <button type="submit" class="w-full bg-butter text-forest-dark font-bold py-3.5 rounded-xl hover:bg-amber-400 transition-all flex items-center justify-center gap-2 shadow-lg shadow-amber-500/10">
+                    가상의 빵 구워 등록하기 🍞✨
+                </button>
+            </form>
+
+            <!-- Board Display Area -->
+            <div class="space-y-4">
+                <h4 class="text-sm font-bold text-butter flex items-center gap-2">
+                    <span>📨 최근 구워진 소통 메시지</span>
+                    <span id="note-count" class="bg-forest text-[11px] text-slate-300 px-2 py-0.5 rounded-full">3</span>
+                </h4>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4" id="sticky-notes-container">
+                    <!-- Default Note 1 -->
+                    <div class="bg-forest-dark/75 border border-emerald-900 p-5 rounded-2xl relative space-y-3">
+                        <div class="flex items-center justify-between">
+                            <span class="text-xs font-bold text-butter">익명의 SSAFY인 🥐</span>
+                            <span class="text-[10px] text-slate-500">방금 전</span>
+                        </div>
+                        <p class="text-xs text-slate-300 leading-relaxed">우와, 통계 전공자이시네요! 이번 1학기 관통 프로젝트 때 알고리즘이나 기획 데이터 설계할 때 꼭 의견 여쭤보고 싶습니다!</p>
+                    </div>
+                    <!-- Default Note 2 -->
+                    <div class="bg-forest-dark/75 border border-emerald-900 p-5 rounded-2xl relative space-y-3">
+                        <div class="flex items-center justify-between">
+                            <span class="text-xs font-bold text-butter">운동메이트러버 ⚡</span>
+                            <span class="text-[10px] text-slate-500">방금 전</span>
+                        </div>
+                        <p class="text-xs text-slate-300 leading-relaxed">러닝 좋아하시다니 완전 반갑네요! SSAFY 체력관리 진짜 중요하다고 들었는데, 주말에 아침 가벼운 조깅팟 짜봐요!</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Call To Action (Coffee Chat) -->
+    <section class="py-20 bg-forest relative overflow-hidden border-t border-emerald-900">
+        <div class="max-w-4xl mx-auto px-6 text-center space-y-6 relative z-10">
+            <span class="text-4xl animate-bounce inline-block">🥐☕🍲</span>
+            <h2 class="text-2xl md:text-3xl font-extrabold text-slate-50">"언제든 편하게 말을 걸어주세요"</h2>
+            <p class="text-slate-300 max-w-xl mx-auto text-sm leading-relaxed">
+                커피 한 잔, 혹은 제가 좋아하는 맘모스빵이나 소금빵 한 조각을 나누며 즐겁고 생산적인 대화를 나눠요. <br>
+                SSAFY 기간 동안 최고의 협업 동료가 될 준비를 마쳤습니다!
+            </p>
+            <div class="flex justify-center gap-4 pt-4">
+                <a href="mailto:example@ssafy.com" class="bg-butter text-forest-dark font-bold px-6 py-3 rounded-full hover:bg-amber-400 transition-all text-xs tracking-wide">
+                    이메일 연락하기 📧
+                </a>
+                <a href="#guestbook" class="bg-forest-dark/40 hover:bg-forest-dark/60 text-slate-200 border border-emerald-700/60 font-semibold px-6 py-3 rounded-full transition-all text-xs tracking-wide">
+                    네트워킹 메시지 쓰기
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-forest-dark py-12 border-t border-emerald-950 text-center text-slate-500 text-xs space-y-4">
+        <div class="flex justify-center gap-6 text-slate-400">
+            <a href="https://github.com" target="_blank" class="hover:text-butter transition">GitHub</a>
+            <a href="#" class="hover:text-butter transition">Notion 포트폴리오</a>
+            <a href="#" class="hover:text-butter transition">블로그</a>
+        </div>
+        <p>© 2026 반전 매력의 SSAFY인. All Rights Reserved.</p>
+        <p class="text-[10px] text-emerald-800">Designed & Programmed with Vanilla JS, Tailwind CSS</p>
+    </footer>
+
+    <!-- JavaScript Interactive Logic -->
+    <script>
+        // 1. Brain Card - Statistical Chart Simulator Randomizer
+        function randomizeChart() {
+            const chartContainer = document.getElementById('chart-container');
+            const bars = chartContainer.querySelectorAll('div');
+            
+            bars.forEach(bar => {
+                const randomHeight = Math.floor(Math.random() * 65) + 30; // 30% to 95%
+                bar.style.height = `${randomHeight}%`;
+            });
+        }
+
+        // 2. Body Card - Stamina Charger
+        let currentStamina = 60;
+        function chargeStamina() {
+            if (currentStamina >= 100) {
+                alertCustomMessage("⚡ 이미 마라토너 수준의 최고 충전 상태(100%)입니다! 언제든 출격할 준비 완료!");
+                return;
+            }
+            currentStamina += 10;
+            if (currentStamina > 100) currentStamina = 100;
+            
+            document.getElementById('stamina-percent').innerText = `${currentStamina}%`;
+            document.getElementById('stamina-bar').style.width = `${currentStamina}%`;
+
+            if (currentStamina === 100) {
+                alertCustomMessage("🏋️‍♂️ 운동으로 풀 충전 완료! 에러 해결 버프 및 코딩 지속 스태미나가 200% 상승했습니다.");
+            }
+        }
+
+        // Custom Inline message popup to bypass alert() constraints
+        function alertCustomMessage(message) {
+            const popup = document.createElement('div');
+            popup.className = "fixed bottom-8 right-8 bg-butter text-forest-dark font-bold px-6 py-4 rounded-2xl shadow-2xl z-50 border border-amber-300 max-w-sm transition-all duration-300 transform translate-y-10 opacity-0 text-sm";
+            popup.innerText = message;
+            document.body.appendChild(popup);
+            
+            setTimeout(() => {
+                popup.classList.remove('translate-y-10', 'opacity-0');
+            }, 10);
+
+            setTimeout(() => {
+                popup.classList.add('translate-y-10', 'opacity-0');
+                setTimeout(() => popup.remove(), 300);
+            }, 4000);
+        }
+
+        // 3. Jukebox Track List & Audio wave interaction
+        const tracks = [
+            { id: 1, emoji: "🎧", title: "집중력을 높여주는 로파이 비트", artist: "잔잔한 코딩 전용 노동요" },
+            { id: 2, emoji: "⚡", title: "스쿼트 & 전력질주 테크노 비트", artist: "피치 올리는 피지컬 트랙" },
+            { id: 3, emoji: "⛰️", title: "등산 정상을 오를 때의 청량감", artist: "어쿠스틱 숲소리 라이브" }
+        ];
+        
+        let isPlaying = false;
+        let currentTrackId = 1;
+        let waveInterval;
+
+        function selectTrack(id) {
+            const track = tracks.find(t => t.id === id);
+            if (!track) return;
+
+            currentTrackId = id;
+            document.getElementById('current-track-emoji').innerText = track.emoji;
+            document.getElementById('current-track-title').innerText = track.title;
+            document.getElementById('current-track-artist').innerText = track.artist;
+            
+            if (!isPlaying) {
+                toggleMusicPlay();
+            } else {
+                startWaveAnimation();
+            }
+        }
+
+        function toggleMusicPlay() {
+            const playButton = document.getElementById('play-button');
+            const vinyl = document.getElementById('music-vinyl');
+            isPlaying = !isPlaying;
+
+            if (isPlaying) {
+                playButton.innerText = "■";
+                playButton.classList.add('bg-amber-400');
+                vinyl.classList.add('animate-[spin_4s_linear_infinite]');
+                startWaveAnimation();
+            } else {
+                playButton.innerText = "▶";
+                playButton.classList.remove('bg-amber-400');
+                vinyl.classList.remove('animate-[spin_4s_linear_infinite]');
+                stopWaveAnimation();
+            }
+        }
+
+        function startWaveAnimation() {
+            clearInterval(waveInterval);
+            const waves = document.getElementById('visualizer').querySelectorAll('div');
+            
+            waveInterval = setInterval(() => {
+                waves.forEach(wave => {
+                    const randomHeight = Math.floor(Math.random() * 80) + 20; // 20% to 100%
+                    wave.style.height = `${randomHeight}%`;
+                });
+            }, 150);
+        }
+
+        function stopWaveAnimation() {
+            clearInterval(waveInterval);
+            const waves = document.getElementById('visualizer').querySelectorAll('div');
+            waves.forEach(wave => {
+                wave.style.height = '10%';
+            });
+        }
+
+        // 4. Guestbook Sticky Note Board Logic
+        let notesCount = 2;
+        function addStickyNote(event) {
+            event.preventDefault();
+            
+            const authorInput = document.getElementById('note-author');
+            const emojiSelect = document.getElementById('note-emoji');
+            const contentInput = document.getElementById('note-content');
+            const container = document.getElementById('sticky-notes-container');
+
+            const author = authorInput.value;
+            const emoji = emojiSelect.value;
+            const content = contentInput.value;
+
+            // Generate clean structure for new note card
+            const noteCard = document.createElement('div');
+            noteCard.className = "bg-forest-dark/75 border border-amber-500/40 p-5 rounded-2xl relative space-y-3 shadow-lg shadow-amber-500/5 hover-card animate-[pulse_1s_ease-out-in_1]";
+            noteCard.innerHTML = `
+                <div class="flex items-center justify-between">
+                    <span class="text-xs font-bold text-butter">${escapeHTML(author)} ${emoji}</span>
+                    <span class="text-[10px] text-amber-400 font-semibold">지금 막 구워짐 🔥</span>
+                </div>
+                <p class="text-xs text-slate-300 leading-relaxed">${escapeHTML(content)}</p>
+            `;
+
+            // Insert at the beginning of list
+            container.insertBefore(noteCard, container.firstChild);
+            
+            // Increment note count
+            notesCount++;
+            document.getElementById('note-count').innerText = notesCount;
+
+            // Clear Inputs
+            authorInput.value = '';
+            contentInput.value = '';
+
+            alertCustomMessage("🥐 메시지가 완벽히 구워져 보드 상단에 걸렸습니다!");
+        }
+
+        function escapeHTML(str) {
+            return str.replace(/[&<>'"]/g, 
+                tag => ({
+                    '&': '&amp;',
+                    '<': '&lt;',
+                    '>': '&gt;',
+                    "'": '&#39;',
+                    '"': '&quot;'
+                }[tag] || tag)
+            );
+        }
+    </script>
+</body>
+</html>
